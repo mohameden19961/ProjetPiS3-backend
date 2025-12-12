@@ -1,0 +1,12 @@
+
+ *************************"/api/auth/login/"*****************************
+ method : post 
+{
+  "email": "test@example.com",
+  "password": "123456",
+  "role": "etudiant",
+  "matricule": "00123",
+  "level": "L3",
+  "nom": "test",
+  "noms_ens": "Sidahmed"
+}
