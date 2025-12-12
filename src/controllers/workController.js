@@ -9,17 +9,26 @@ exports.submitWork = (req, res) => {
         return res.status(400).json({ error: "Aucun fichier reçu" });
     }
 
+    const now = new Date();
+    const formattedDate = now.toLocaleString('fr-FR');
+
     const workData = {
         id_etud,
+        nom,
+        matricule,
         nb_files: files.length,
         file_paths: JSON.stringify(files.map(f => f.path)),
-        nom,
-        matricule
+        last_update: formattedDate
     };
 
     Work.submit(workData, (err) => {
         if (err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ message: "Fichiers enregistrés avec succès" });
+        
+        res.status(201).json({ 
+            message: "Fichiers enregistrés avec succès",
+            submitted_at: formattedDate,
+            folder: `uploads/submissions/${matricule}`
+        });
     });
 };
 
